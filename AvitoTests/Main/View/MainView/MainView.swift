@@ -32,4 +32,8 @@ class MainView: UIView {
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
+    
+    func reloadData() {
+        collectionView.reloadData()
+    }
 }

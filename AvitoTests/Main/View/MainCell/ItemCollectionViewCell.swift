@@ -8,18 +8,22 @@
 import UIKit
 
 class ItemCollectionViewCell: UICollectionViewCell {
+    private var indicator: UIActivityIndicatorView = {
+       let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     private var itemImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 10
         imageView.layer.masksToBounds = true
-        imageView.image = UIImage(named: "1")
         return imageView
     }()
     private var titleLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Смартфон Apple iPhone 12"
         label.font = .systemFont(ofSize: 15)
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
@@ -28,14 +32,13 @@ class ItemCollectionViewCell: UICollectionViewCell {
     private var priceLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "55000 ₽"
         label.font = .boldSystemFont(ofSize: 15)
+        label.sizeToFit()
         return label
     }()
     private var locationLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Москва"
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .gray
         return label
@@ -43,7 +46,6 @@ class ItemCollectionViewCell: UICollectionViewCell {
     private var dateLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "2023-08-16"
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .gray
         return label
@@ -64,11 +66,32 @@ class ItemCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(priceLabel)
         contentView.addSubview(locationLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(indicator)
+    }
+    
+    func configure(with viewModel: itemCellViewModel) {
+        titleLabel.text = viewModel.title
+        priceLabel.text = viewModel.price
+        locationLabel.text = viewModel.location
+        dateLabel.text = viewModel.date
+        
+        if let imageData = viewModel.imageData {
+            itemImageView.image = UIImage(data: imageData)
+        } else {
+            indicator.startAnimating()
+            viewModel.fetchImageData { [weak self] imageData in
+                guard let self else { return }
+                DispatchQueue.main.async {
+                    self.indicator.isHidden = true
+                    self.indicator.stopAnimating()
+                    self.itemImageView.image = UIImage(data: imageData)
+                }
+            }
+        }
     }
     
     override func layoutSubviews() {
         NSLayoutConstraint.activate([
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
@@ -83,11 +106,15 @@ class ItemCollectionViewCell: UICollectionViewCell {
             titleLabel.bottomAnchor.constraint(equalTo: priceLabel.topAnchor, constant: -5),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            titleLabel.topAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: 5),
             
             itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             itemImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            itemImageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -5),
+            itemImageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            indicator.centerXAnchor.constraint(equalTo: itemImageView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: itemImageView.centerYAnchor),
         ])
     }
     

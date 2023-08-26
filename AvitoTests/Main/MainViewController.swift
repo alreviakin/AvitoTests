@@ -9,6 +9,8 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var viewModel = MainViewModel()
+    
     private var mainView = MainView()
     
     override func loadView() {
@@ -25,14 +27,15 @@ class MainViewController: UIViewController {
 
 extension MainViewController: MainViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return viewModel.numberOfRow()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ItemCollectionViewCell else {
             return UICollectionViewCell()
         }
-//        cell.backgroundColor = .red
+        let cellViewModel = viewModel.getItemCellViewModel(for: indexPath)
+        cell.configure(with: cellViewModel)
         return cell
     }
     
@@ -50,5 +53,11 @@ extension MainViewController: MainViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+}
+
+extension MainViewController: MainViewControllerDelegate {
+    func reloadData() {
+        mainView.reloadData()
     }
 }
