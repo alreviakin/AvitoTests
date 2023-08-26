@@ -20,6 +20,7 @@
 		AEABD1DF2A991EBB00341D8F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1DE2A991EBB00341D8F /* Item.swift */; };
 		AEABD1E52A9921BB00341D8F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1E42A9921BB00341D8F /* NetworkManager.swift */; };
 		AEABD1E72A9923E500341D8F /* MainViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1E62A9923E500341D8F /* MainViewControllerDelegate.swift */; };
+		AEABD1EB2A9A64C200341D8F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1EA2A9A64C200341D8F /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		AEABD1DE2A991EBB00341D8F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AEABD1E42A9921BB00341D8F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AEABD1E62A9923E500341D8F /* MainViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AEABD1EA2A9A64C200341D8F /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,10 +72,11 @@
 		AEABD1B62A97C04300341D8F /* AvitoTests */ = {
 			isa = PBXGroup;
 			children = (
-				AEABD1E32A9921AC00341D8F /* Managers */,
 				AEABD1CC2A97C08000341D8F /* Application */,
 				AEABD1CD2A97C0FC00341D8F /* Main */,
 				AEABD1DD2A991EB300341D8F /* Model */,
+				AEABD1E32A9921AC00341D8F /* Managers */,
+				AEABD1E92A9A64A800341D8F /* Service */,
 				AEABD1CB2A97C06F00341D8F /* SupportingFiles */,
 			);
 			path = AvitoTests;
@@ -152,6 +155,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		AEABD1E92A9A64A800341D8F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				AEABD1EA2A9A64C200341D8F /* Reachability.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -224,6 +235,7 @@
 			files = (
 				AEABD1DA2A97CC9100341D8F /* MainViewModel.swift in Sources */,
 				AEABD1DF2A991EBB00341D8F /* Item.swift in Sources */,
+				AEABD1EB2A9A64C200341D8F /* Reachability.swift in Sources */,
 				AEABD1CF2A97C10900341D8F /* MainViewController.swift in Sources */,
 				AEABD1D22A97C11900341D8F /* MainView.swift in Sources */,
 				AEABD1E52A9921BB00341D8F /* NetworkManager.swift in Sources */,

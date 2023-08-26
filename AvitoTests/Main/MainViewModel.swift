@@ -13,7 +13,6 @@ class MainViewModel {
     var items: [Item] = [] {
         didSet {
             delegate?.reloadData()
-            print("reload")
         }
     }
     var imagesData: [String : Data] = [:]

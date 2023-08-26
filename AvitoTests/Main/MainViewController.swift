@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     override func loadView() {
         super.loadView()
         view = mainView
+        viewModel.delegate = self
         mainView.delegate = self
         mainView.configure()
     }
