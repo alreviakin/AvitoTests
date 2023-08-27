@@ -13,4 +13,6 @@ protocol MainViewDelegate: AnyObject,
                            UICollectionViewDelegate,
                            UICollectionViewDelegateFlowLayout{
     
+    func presentView(_ viewController: UIViewController)
+    
 }

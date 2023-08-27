@@ -10,13 +10,13 @@ import Foundation
 class itemCellViewModel {
     
     var imageURL: String
-    var imageData: Data?
+    var imageData: Data
     var title: String
     var price: String
     var location: String
     var date: String
     
-    init(item: Item, imageData: Data?) {
+    init(item: Item, imageData: Data) {
         self.imageURL = item.imageURL ?? ""
         self.title = item.title ?? ""
         self.price = item.price ?? ""
@@ -25,9 +25,9 @@ class itemCellViewModel {
         self.imageData = imageData
     }
     
-    func fetchImageData(completion: @escaping (Data)->()) {
-        NetworkManager.shared.fecthImage(from: imageURL) { imageData in
-            completion(imageData)
-        }
-    }
+//    func fetchImageData(completion: @escaping (Data)->()) {
+//        NetworkManager.shared.fecthImage(from: imageURL) { imageData in
+//            completion(imageData)
+//        }
+//    }
 }

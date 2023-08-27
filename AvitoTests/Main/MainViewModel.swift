@@ -12,10 +12,14 @@ class MainViewModel {
     
     var items: [Item] = [] {
         didSet {
+            fetchImages()
+        }
+    }
+    var imagesData: [String : Data] = [:] {
+        didSet {
             delegate?.reloadData()
         }
     }
-    var imagesData: [String : Data] = [:]
     
     init() {
         fetchData()
@@ -28,16 +32,33 @@ class MainViewModel {
     func getItemCellViewModel(for indexPath: IndexPath) -> itemCellViewModel {
         
         let item = items[indexPath.row]
-        if let imageData = imagesData[item.imageURL ?? ""] {
-            return itemCellViewModel(item: item, imageData: imageData)
-        } else {
+        let imageData = imagesData[item.imageURL ?? ""] ?? Data()
+        return itemCellViewModel(item: item, imageData: imageData)
+//        } else {
+//            if let imageURL = item.imageURL {
+//                NetworkManager.shared.fecthImage(from: imageURL) {[weak self] imageData in
+//                    guard let self else { return }
+//                    self.imagesData[imageURL] = imageData
+//                }
+//            }
+//            return itemCellViewModel(item: item, imageData: nil)
+//        }
+    }
+    
+    private func fetchImages() {
+        var imagesData: [String: Data] = [:]
+        let group = DispatchGroup()
+        for item in items {
             if let imageURL = item.imageURL {
-                NetworkManager.shared.fecthImage(from: imageURL) {[weak self] imageData in
-                    guard let self else { return }
-                    self.imagesData[imageURL] = imageData
+                group.enter()
+                NetworkManager.shared.fecthImage(from: imageURL) { imageData in
+                    imagesData[imageURL] = imageData
+                    group.leave()
                 }
             }
-            return itemCellViewModel(item: item, imageData: nil)
+        }
+        group.notify(queue: .main) {
+            self.imagesData = imagesData
         }
     }
     
@@ -46,5 +67,10 @@ class MainViewModel {
             guard let items else { return }
             self.items = items
         }
+    }
+    
+    deinit {
+        items = []
+        imagesData = [:]
     }
 }

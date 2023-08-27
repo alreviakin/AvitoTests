@@ -75,25 +75,27 @@ class ItemCollectionViewCell: UICollectionViewCell {
         locationLabel.text = viewModel.location
         dateLabel.text = viewModel.date
         
-        if let imageData = viewModel.imageData {
-            itemImageView.image = UIImage(data: imageData)
-        } else {
-            indicator.startAnimating()
-            viewModel.fetchImageData { [weak self] imageData in
-                guard let self else { return }
-                DispatchQueue.main.async {
-                    self.indicator.isHidden = true
-                    self.indicator.stopAnimating()
-                    self.itemImageView.image = UIImage(data: imageData)
-                }
-            }
-        }
+        itemImageView.image = UIImage(data: viewModel.imageData)
+//        if let imageData = viewModel.imageData {
+//            itemImageView.image = UIImage(data: imageData)
+//        } else {
+//            indicator.startAnimating()
+//            viewModel.fetchImageData { [weak self] imageData in
+//                guard let self else { return }
+//                DispatchQueue.main.async {
+//                    self.indicator.isHidden = true
+//                    self.indicator.stopAnimating()
+//                    self.itemImageView.image = UIImage(data: imageData)
+//                }
+//            }
+//        }
     }
     
     override func layoutSubviews() {
         NSLayoutConstraint.activate([
             dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            dateLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
             
             locationLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor, constant: -2),
             locationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -111,7 +113,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
             itemImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             itemImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            itemImageView.heightAnchor.constraint(equalToConstant: 200),
+            itemImageView.heightAnchor.constraint(equalToConstant: contentView.bounds.height * 0.7),
             
             indicator.centerXAnchor.constraint(equalTo: itemImageView.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: itemImageView.centerYAnchor),

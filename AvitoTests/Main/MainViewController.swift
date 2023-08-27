@@ -18,11 +18,19 @@ class MainViewController: UIViewController {
         view = mainView
         viewModel.delegate = self
         mainView.delegate = self
-        mainView.configure()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let isConnected = Reachability.isConnectedToNetwork()
+        mainView.configure(isConnected: isConnected)
+        mainView.layout(isConnected: isConnected)
+        if !isConnected {
+            DispatchQueue.main.async {
+                self.mainView.presentAlert()
+                self.mainView.layout(isConnected: false)
+            }
+        }
     }
 }
 
@@ -54,6 +62,10 @@ extension MainViewController: MainViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+    
+    func presentView(_ viewController: UIViewController) {
+        present(viewController, animated: true)
     }
 }
 
