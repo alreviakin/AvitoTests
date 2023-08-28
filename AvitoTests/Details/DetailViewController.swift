@@ -42,6 +42,8 @@ extension DetailViewController: DetailViewControllerDelegate {
     func loadingErrorImageAlert() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
+            self.detailView.configure(isConnected: false, isFirstConfigure: false)
+            self.detailView.layout(isConnected: false, isFirstLayout: false)
             let alert = AlertService().getLoadingErrorImage {
                 self.reload()
             }

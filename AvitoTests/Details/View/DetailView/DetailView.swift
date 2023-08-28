@@ -142,6 +142,10 @@ class DetailView: UIView {
             addSubview(indicator)
             indicator.startAnimating()
         }else {
+            indicator.stopAnimating()
+            indicator.isHidden = true
+            errorLabel.isHidden = false
+            reloadButton.isHidden = false
             addSubview(reloadButton)
             addSubview(errorLabel)
         }
