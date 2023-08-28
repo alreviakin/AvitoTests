@@ -21,6 +21,13 @@
 		AEABD1E52A9921BB00341D8F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1E42A9921BB00341D8F /* NetworkManager.swift */; };
 		AEABD1E72A9923E500341D8F /* MainViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1E62A9923E500341D8F /* MainViewControllerDelegate.swift */; };
 		AEABD1EB2A9A64C200341D8F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1EA2A9A64C200341D8F /* Reachability.swift */; };
+		AEABD1EE2A9B9A0500341D8F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1ED2A9B9A0500341D8F /* DetailViewController.swift */; };
+		AEABD1F22A9B9A2000341D8F /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1F12A9B9A2000341D8F /* DetailView.swift */; };
+		AEABD1F42A9BA4CB00341D8F /* DetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1F32A9BA4CB00341D8F /* DetailItem.swift */; };
+		AEABD1F62A9BA53A00341D8F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1F52A9BA53A00341D8F /* DetailViewModel.swift */; };
+		AEABD1F82A9C0E7900341D8F /* DetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1F72A9C0E7900341D8F /* DetailViewDelegate.swift */; };
+		AEABD1FA2A9C103700341D8F /* DetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1F92A9C103700341D8F /* DetailViewControllerDelegate.swift */; };
+		AEABD1FD2A9C292F00341D8F /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABD1FC2A9C292F00341D8F /* AlertService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +47,13 @@
 		AEABD1E42A9921BB00341D8F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AEABD1E62A9923E500341D8F /* MainViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AEABD1EA2A9A64C200341D8F /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		AEABD1ED2A9B9A0500341D8F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		AEABD1F12A9B9A2000341D8F /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		AEABD1F32A9BA4CB00341D8F /* DetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItem.swift; sourceTree = "<group>"; };
+		AEABD1F52A9BA53A00341D8F /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		AEABD1F72A9C0E7900341D8F /* DetailViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewDelegate.swift; sourceTree = "<group>"; };
+		AEABD1F92A9C103700341D8F /* DetailViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerDelegate.swift; sourceTree = "<group>"; };
+		AEABD1FC2A9C292F00341D8F /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +88,7 @@
 			children = (
 				AEABD1CC2A97C08000341D8F /* Application */,
 				AEABD1CD2A97C0FC00341D8F /* Main */,
+				AEABD1EC2A9B99F400341D8F /* Details */,
 				AEABD1DD2A991EB300341D8F /* Model */,
 				AEABD1E32A9921AC00341D8F /* Managers */,
 				AEABD1E92A9A64A800341D8F /* Service */,
@@ -143,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				AEABD1DE2A991EBB00341D8F /* Item.swift */,
+				AEABD1F32A9BA4CB00341D8F /* DetailItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -159,8 +175,37 @@
 			isa = PBXGroup;
 			children = (
 				AEABD1EA2A9A64C200341D8F /* Reachability.swift */,
+				AEABD1FC2A9C292F00341D8F /* AlertService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		AEABD1EC2A9B99F400341D8F /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				AEABD1EF2A9B9A0700341D8F /* View */,
+				AEABD1ED2A9B9A0500341D8F /* DetailViewController.swift */,
+				AEABD1F52A9BA53A00341D8F /* DetailViewModel.swift */,
+				AEABD1F92A9C103700341D8F /* DetailViewControllerDelegate.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		AEABD1EF2A9B9A0700341D8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AEABD1F02A9B9A0E00341D8F /* DetailView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AEABD1F02A9B9A0E00341D8F /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				AEABD1F12A9B9A2000341D8F /* DetailView.swift */,
+				AEABD1F72A9C0E7900341D8F /* DetailViewDelegate.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,18 +278,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEABD1EE2A9B9A0500341D8F /* DetailViewController.swift in Sources */,
 				AEABD1DA2A97CC9100341D8F /* MainViewModel.swift in Sources */,
 				AEABD1DF2A991EBB00341D8F /* Item.swift in Sources */,
+				AEABD1F22A9B9A2000341D8F /* DetailView.swift in Sources */,
 				AEABD1EB2A9A64C200341D8F /* Reachability.swift in Sources */,
 				AEABD1CF2A97C10900341D8F /* MainViewController.swift in Sources */,
 				AEABD1D22A97C11900341D8F /* MainView.swift in Sources */,
 				AEABD1E52A9921BB00341D8F /* NetworkManager.swift in Sources */,
 				AEABD1B82A97C04300341D8F /* AppDelegate.swift in Sources */,
 				AEABD1D82A97C53000341D8F /* ItemCollectionViewCell.swift in Sources */,
+				AEABD1F82A9C0E7900341D8F /* DetailViewDelegate.swift in Sources */,
 				AEABD1DC2A991E2100341D8F /* ItemCellViewModel.swift in Sources */,
+				AEABD1FD2A9C292F00341D8F /* AlertService.swift in Sources */,
+				AEABD1FA2A9C103700341D8F /* DetailViewControllerDelegate.swift in Sources */,
 				AEABD1E72A9923E500341D8F /* MainViewControllerDelegate.swift in Sources */,
+				AEABD1F42A9BA4CB00341D8F /* DetailItem.swift in Sources */,
 				AEABD1D42A97C12200341D8F /* MainViewDelegate.swift in Sources */,
 				AEABD1BA2A97C04300341D8F /* SceneDelegate.swift in Sources */,
+				AEABD1F62A9BA53A00341D8F /* DetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

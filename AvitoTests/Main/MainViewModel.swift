@@ -10,12 +10,13 @@ import Foundation
 class MainViewModel {
     weak var delegate: MainViewControllerDelegate?
     
+    //MARK: - Variables
     var items: [Item] = [] {
         didSet {
             fetchImages()
         }
     }
-    var imagesData: [String : Data] = [:] {
+    var imagesData: [String : Data]? = [:] {
         didSet {
             delegate?.reloadData()
         }
@@ -25,6 +26,7 @@ class MainViewModel {
         fetchData()
     }
     
+    //MARK: - Collection
     func numberOfRow() -> Int {
         return items.count
     }
@@ -32,19 +34,16 @@ class MainViewModel {
     func getItemCellViewModel(for indexPath: IndexPath) -> itemCellViewModel {
         
         let item = items[indexPath.row]
-        let imageData = imagesData[item.imageURL ?? ""] ?? Data()
+        let imageData = imagesData?[item.imageURL ?? ""] ?? Data()
         return itemCellViewModel(item: item, imageData: imageData)
-//        } else {
-//            if let imageURL = item.imageURL {
-//                NetworkManager.shared.fecthImage(from: imageURL) {[weak self] imageData in
-//                    guard let self else { return }
-//                    self.imagesData[imageURL] = imageData
-//                }
-//            }
-//            return itemCellViewModel(item: item, imageData: nil)
-//        }
     }
     
+    func getDetailViewModel(for indexPath: IndexPath) -> DetailViewModel? {
+        guard let id = items[indexPath.row].id else { return nil}
+        return DetailViewModel(id: id)
+    }
+    
+    //MARK: - Networking
     private func fetchImages() {
         var imagesData: [String: Data] = [:]
         let group = DispatchGroup()
@@ -69,8 +68,7 @@ class MainViewModel {
         }
     }
     
-    deinit {
-        items = []
-        imagesData = [:]
+    func reload() {
+        fetchData()
     }
 }

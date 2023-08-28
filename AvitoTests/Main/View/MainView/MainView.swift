@@ -33,23 +33,31 @@ class MainView: UIView {
         label.textAlignment = .center
         return label
     }()
-    
+    private lazy var reloadButton: UIButton = {
+       let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Обновить", for: .normal)
+        button.layer.cornerRadius = 8
+        button.layer.masksToBounds = true
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .blue
+        button.addTarget(self, action: #selector(reload), for: .touchUpInside)
+        return button
+    }()
 
     func configure(isConnected: Bool) {
         backgroundColor = .white
         if isConnected {
+            self.errorLabel.isHidden = true
+            self.reloadButton.isHidden = true
             addSubview(collectionView)
             collectionView.isHidden = true
             addSubview(indicator)
             indicator.startAnimating()
         }else {
             addSubview(errorLabel)
+            addSubview(reloadButton)
         }
-    }
-    
-    func presentAlert() {
-        delegate?.presentView(getAlert())
-        
     }
     
     func layout(isConnected: Bool) {
@@ -64,9 +72,16 @@ class MainView: UIView {
                 indicator.centerYAnchor.constraint(equalTo: centerYAnchor),
             ])
         } else {
+            guard let reloadTitleLabel = reloadButton.titleLabel else { return }
             NSLayoutConstraint.activate([
                 errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
                 errorLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+                
+                reloadButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+                reloadButton.topAnchor.constraint(equalTo: errorLabel.bottomAnchor, constant: 10),
+                
+                reloadTitleLabel.leadingAnchor.constraint(equalTo: reloadButton.leadingAnchor, constant: 10),
+                reloadTitleLabel.trailingAnchor.constraint(equalTo: reloadButton.trailingAnchor, constant: -10),
             ])
         }
     }
@@ -80,15 +95,8 @@ class MainView: UIView {
             self.collectionView.reloadData()
         }
     }
-}
-
-extension MainView {
-    private func getAlert() -> UIAlertController{
-        let alert = UIAlertController(title: "Ошибка подключения к сети", message: "Попробовать обновить?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Назад", style: .cancel)
-        let reloadAction = UIAlertAction(title: "Обновить", style: .default)
-        alert.addAction(cancelAction)
-        alert.addAction(reloadAction)
-        return alert
+    
+    @objc private func reload() {
+        delegate?.reload()
     }
 }
